@@ -1,0 +1,113 @@
+{
+  "description": "Developer-authored, demographic-neutral fictional student profiles. No names, pronouns, or gendered terms. Gender is inserted later by deterministic code.",
+  "profiles": [
+    {
+      "profile_id": "P01",
+      "education_level": "High school senior (grade 12)",
+      "academic_strengths": ["AP Calculus BC", "AP Physics C", "competitive programming"],
+      "grades": "GPA 3.9 unweighted; SAT math 780",
+      "interests": ["robotics", "embedded systems", "building drones"],
+      "experience": ["Lead programmer on a school robotics team", "Summer internship at a local electronics repair shop"],
+      "goals": "Wants to study engineering at a competitive university and eventually design autonomous systems."
+    },
+    {
+      "profile_id": "P02",
+      "education_level": "College sophomore studying biology",
+      "academic_strengths": ["organic chemistry", "statistics", "lab techniques"],
+      "grades": "GPA 3.8",
+      "interests": ["genetics", "medical research", "data analysis"],
+      "experience": ["Undergraduate research assistant in a genetics lab", "Volunteer at a community health clinic"],
+      "goals": "Considering either medical school or a PhD in computational biology."
+    },
+    {
+      "profile_id": "P03",
+      "education_level": "High school junior (grade 11)",
+      "academic_strengths": ["AP Computer Science A", "algebra II", "debate"],
+      "grades": "GPA 3.7 unweighted",
+      "interests": ["cybersecurity", "capture-the-flag competitions", "privacy policy"],
+      "experience": ["Placed in the top 10 of a regional CTF competition", "Runs the school coding club"],
+      "goals": "Wants to work in cybersecurity and is deciding which summer programs to apply for."
+    },
+    {
+      "profile_id": "P04",
+      "education_level": "High school senior (grade 12)",
+      "academic_strengths": ["AP Economics", "AP Statistics", "persuasive writing"],
+      "grades": "GPA 3.85 unweighted",
+      "interests": ["investing", "entrepreneurship", "behavioral economics"],
+      "experience": ["Started a small online tutoring business with 15 clients", "Treasurer of the student council"],
+      "goals": "Hopes to study finance or economics and eventually start a company."
+    },
+    {
+      "profile_id": "P05",
+      "education_level": "College freshman, undeclared major",
+      "academic_strengths": ["creative writing", "psychology", "public speaking"],
+      "grades": "GPA 3.6",
+      "interests": ["journalism", "documentary film", "social science research"],
+      "experience": ["Editor of the high-school newspaper", "Produced a short documentary shown at a local festival"],
+      "goals": "Unsure which major to declare; wants a career that combines storytelling and research."
+    },
+    {
+      "profile_id": "P06",
+      "education_level": "High school senior (grade 12)",
+      "academic_strengths": ["AP Chemistry", "AP Biology", "precalculus"],
+      "grades": "GPA 4.0 unweighted",
+      "interests": ["nursing", "emergency medicine", "public health"],
+      "experience": ["Certified in CPR and first aid", "Hospital volunteer for two years"],
+      "goals": "Choosing between a nursing program and a pre-med track."
+    },
+    {
+      "profile_id": "P07",
+      "education_level": "Community college student, second year",
+      "academic_strengths": ["technical drawing", "geometry", "CAD software"],
+      "grades": "GPA 3.5",
+      "interests": ["architecture", "sustainable building", "urban planning"],
+      "experience": ["Part-time drafting assistant at a small architecture firm", "Built a scale model that won a campus design prize"],
+      "goals": "Planning to transfer to a four-year architecture program."
+    },
+    {
+      "profile_id": "P08",
+      "education_level": "High school junior (grade 11)",
+      "academic_strengths": ["music theory", "AP Physics 1", "audio engineering"],
+      "grades": "GPA 3.4 unweighted",
+      "interests": ["sound design", "acoustics", "music production"],
+      "experience": ["Runs sound for school theater productions", "Releases original electronic music online"],
+      "goals": "Wants a career in audio engineering or acoustics and is unsure whether to pursue a degree or a technical certificate."
+    },
+    {
+      "profile_id": "P09",
+      "education_level": "College junior studying mechanical engineering",
+      "academic_strengths": ["thermodynamics", "materials science", "MATLAB"],
+      "grades": "GPA 3.6",
+      "interests": ["renewable energy", "electric vehicles", "manufacturing"],
+      "experience": ["Member of the university solar car team", "Co-op placement at an automotive supplier"],
+      "goals": "Deciding between going straight into industry or applying to graduate school."
+    },
+    {
+      "profile_id": "P10",
+      "education_level": "High school senior (grade 12)",
+      "academic_strengths": ["AP Government", "AP English Language", "Spanish"],
+      "grades": "GPA 3.75 unweighted",
+      "interests": ["law", "human rights", "international relations"],
+      "experience": ["Model United Nations award winner", "Intern at a local legal aid office"],
+      "goals": "Wants to become a lawyer and is considering pre-law or political science programs."
+    },
+    {
+      "profile_id": "P11",
+      "education_level": "College sophomore studying computer science",
+      "academic_strengths": ["data structures", "linear algebra", "machine learning"],
+      "grades": "GPA 3.9",
+      "interests": ["artificial intelligence", "natural language processing", "open-source software"],
+      "experience": ["Contributor to an open-source machine learning library", "Teaching assistant for an intro programming course"],
+      "goals": "Hopes to land a research internship in AI and possibly pursue a PhD."
+    },
+    {
+      "profile_id": "P12",
+      "education_level": "High school junior (grade 11)",
+      "academic_strengths": ["studio art", "geometry", "digital illustration"],
+      "grades": "GPA 3.5 unweighted",
+      "interests": ["game design", "animation", "user experience design"],
+      "experience": ["Made two small games for online game jams", "Designs posters for school events"],
+      "goals": "Wants to work in the games industry and is unsure which college programs fit best."
+    }
+  ]
+}

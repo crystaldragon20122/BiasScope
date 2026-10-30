@@ -1,0 +1,8 @@
+# Python 3.10 - 3.13. Tested with Python 3.13 and the versions noted in the README.
+streamlit>=1.50,<2
+pydantic>=2.6,<3
+pandas>=2.1,<3
+plotly>=5.20,<7
+requests>=2.31,<3
+python-dotenv>=1.0,<2
+pytest>=8,<9
