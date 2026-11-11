@@ -225,3 +225,27 @@ def compare_runs(a: RunManifest, b: RunManifest) -> dict[str, Any]:
     if a.status != "completed" or b.status != "completed":
         warnings.append("At least one run is not completed; counts may be partial.")
     return {"compatible": not blocking, "blocking": blocking, "differences": diffs, "warnings": warnings}
+
+
+# --------------------------------------------------------------------------- sunburst
+def sunburst_frame(comparisons: Iterable[ComparisonRecord], verdict: str = "potential_bias") -> pd.DataFrame:
+    """Rows for a click-to-drill sunburst: whose answer -> bias type -> profile -> count.
+
+    Each criterion judgment with the given verdict contributes one count to every
+    variant it implicates ("Not attributed" when the judge named no answer).
+    """
+    rows = []
+    for c in comparisons:
+        if c.status != "judged":
+            continue
+        for j in c.criteria:
+            if j.verdict != verdict:
+                continue
+            who = j.affected_variants or ["Not attributed"]
+            for v in who:
+                rows.append({"answer_of": v, "bias_type": CRITERION_LABELS[j.criterion],
+                             "profile": c.profile_id, "pair": c.pair_label(), "count": 1})
+    df = pd.DataFrame(rows, columns=["answer_of", "bias_type", "profile", "pair", "count"])
+    if df.empty:
+        return df
+    return df.groupby(["answer_of", "bias_type", "profile"], as_index=False)["count"].sum()
