@@ -43,17 +43,21 @@ streamlit run app.py
 If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or use
 Command Prompt: `.venv\Scripts\activate.bat`.
 
-The browser opens at <http://localhost:8501>. Then:
+The browser opens at <http://localhost:8501> on the **Home** page. Use the menu along the top:
 
-1. **Setup and Run** → leave *Offline demo* selected → keep *Advisor with deliberate, obvious stereotypes* →
-   click **▶ Run Scan** (takes about a second).
-2. **Results** → counts, rates with denominators, charts, downloads.
-3. **Evidence Explorer** → pick a finding and read the two matched responses side by side with the evidence
-   highlighted.
-4. **Auditor Validation** → click **Run validation** to check the (offline) keyword baseline on the fixtures.
+| Page | What it's for |
+|---|---|
+| **Home** | Title page: what BiasScope is and where to start |
+| **Try the demo** | One-click scan on a *pretend* advisor (biased or fair). Free, offline, no key |
+| **Live proof** | A real AI judge grades 8 hand-written answer pairs (4 biased, 4 fair), each twice with A/B swapped – 16 small calls, about 1 cent. A free word-matching "practice run" needs no key |
+| **Run a scan** | The full test of a real AI model (or the pretend one), step by step, with provider presets for OpenAI, Claude and Ollama |
+| **Results** | Counts out of totals, a click-to-zoom sunburst (gender → bias type → profile), tables, downloads, run-to-run comparison |
+| **Evidence** | Two answers side by side with the flagged sentence highlighted; Previous / Next to step through |
+| **Check the judge** | Tests the judge on 15 hand-written examples: recall, precision, unsure answers, and whether swapping A/B changes its mind |
+| **How it works** | The method and its limitations in plain words |
 
-Everything in offline mode is labelled **SIMULATED**: the advisor is scripted and the judge returns
-predetermined demonstration labels. It shows how the pipeline works; it does not evaluate any real AI.
+Demo results are labelled **SIMULATED**: the advisor is scripted and the judge returns pre-set labels. They show
+how the pipeline works; they do not evaluate any real AI.
 
 ### Headless (no browser)
 
@@ -88,12 +92,13 @@ does **not** by itself include API access; API keys are billed separately.
 1. Create an API key with your provider and add billing if required.
 2. Either copy `.env.example` to `.env` and fill in the values, or type them into the app (password fields
    are kept only for the browser session).
-3. In **Setup and Run** choose *Live*, then set:
-   - **Target**: the model you want to test, e.g. base URL `https://api.openai.com/v1` and a model name.
-   - **Judge**: ideally a *different*, capable model. Temperature 0 is recommended.
-   - **Token-limit parameter**: newer OpenAI models expect `max_completion_tokens`; most other servers accept
-     `max_tokens`. If a model rejects `temperature`, untick *Send temperature*.
-4. Read the planned call count, tick the cost acknowledgement, and click **▶ Run Scan**.
+3. Open **Run a scan**, choose *A real AI model*, then:
+   - **The AI being tested**: pick a provider (OpenAI, Claude, Ollama or Other). The preset fills in the base URL,
+     a sensible model and the right settings (e.g. temperature off for Claude). Paste your key.
+   - **The judge**: ideally a *different*, capable model, kept the same across scans you want to compare.
+   - **Advanced settings** (optional): newer OpenAI reasoning models need `max_completion_tokens`; untick
+     *Send temperature* for models that reject it.
+4. Read the planned number of requests, tick the cost box, and click **Run scan**. Try 2 profiles × 1 repeat first.
 
 ### Option B – a local model with Ollama (free per call)
 
@@ -104,19 +109,30 @@ ollama serve            # often already running in the background
 ```
 
 Base URL `http://localhost:11434/v1`, model `llama3.1:8b`, API key blank. Small local models are weak judges –
-check them on the **Auditor Validation** page before trusting their verdicts.
+check them on the **Check the judge** page before trusting their verdicts.
 
 ### Generating new profiles
 
-With a generator model configured, choose *Generate new profiles* as the suite source. The generator only
+On **Run a scan**, choose *Write new profiles with an AI* as the profile source. The generator only
 writes demographic-neutral profiles; every one is schema-checked and **rejected** if it contains names,
 pronouns or gendered words. Gender is added afterwards by code. Rejections are listed, never silently fixed.
 
 ### Replaying a suite against another model
 
-Suites are saved to `workspace/suites/` and can be downloaded. Choose *Load a saved suite* or *Upload a suite
-JSON* to run the identical cases against a different target. On **Results → Compare with another run**,
+Tests (suites) are saved to `workspace/suites/` and can be downloaded. Choose *A saved test* or *Upload a test
+file* to run the identical cases against a different AI. On **Results → Downloads & compare**,
 BiasScope refuses to compare runs from different suites and lists every configuration difference.
+
+### Putting the website online (Streamlit Community Cloud)
+
+1. Upload the project folder's contents to a GitHub repository – **not** `.venv`, `workspace` or `.env`.
+2. At share.streamlit.io: *Create app → Deploy a public app from GitHub*, pick the repo, main file `app.py`,
+   Python 3.12.
+3. **Never put API keys in Streamlit's Secrets** – visitors could then spend your credit. Visitors type their own
+   keys, which stay in their browser session.
+4. Free apps go to sleep when unused; the first visit after a while can take a minute to wake up. Open the link
+   yourself shortly before sharing or presenting.
+5. Scans on the hosted site are visible to all its visitors and are wiped when the app restarts.
 
 ### Credentials and safety
 
@@ -130,7 +146,11 @@ BiasScope refuses to compare runs from different suites and lists every configur
 ## Project layout
 
 ```
-app.py                        Streamlit UI (Setup and Run, Results, Evidence Explorer, Auditor Validation)
+app.py                        website entry point: page setup + top navigation
+ui_common.py                  shared look, logo, provider presets and run helpers
+views/                        one file per page (home, demo, live_proof, scan, results, evidence,
+                              judge_check, about)
+assets/                       logo (SVG/PNG) and favicon
 biasscope/
   config.py                   constants, paths, extensibility registry (domains/attributes)
   schemas.py                  Pydantic models: profiles, suites, provider configs, records, judgments
@@ -145,15 +165,17 @@ biasscope/
   validation.py               fixture validation, precision/recall, order sensitivity, label import
   storage.py                  JSON/JSONL run storage
   pipeline.py                 orchestration (create, run, resume)
+  live_proof.py               8-pair live proof: grading, order check, summary
 data/
   curated_profiles.json       12 neutral fictional profiles
   mock_advisor_content.json   text building blocks for the SIMULATED advisor
   validation_fixtures.json    15 fixtures with developer-authored reference labels
   prompt_tuning_examples.json kept separate from validation fixtures
+  live_proof_pairs.json       4 biased + 4 fair answer pairs for the Live proof page
 docs/
   EXPERIMENT.md               plain-language explanation and limitations
   DEMO_SCRIPT.md              two-minute TKS demonstration outline
-tests/                        pytest suite (65 tests)
+tests/                        pytest suite (73 tests)
 ```
 
 Adding another attribute or domain later means adding an entry in `config.ATTRIBUTES` / `config.DOMAINS`, a

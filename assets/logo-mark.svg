@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="150" viewBox="0 0 220 150" role="img" aria-label="BiasScope logo: a hand-drawn eye whose pupil is an equals sign"><defs><filter id="bs-rough" x="-10%" y="-10%" width="120%" height="120%">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="9"/>
+<feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs>
+<g  fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M14 92 C52 38 160 34 206 90 C160 146 58 148 18 96 C40 92 60 96 72 92 C70 68 92 52 112 54 C136 56 150 76 146 98 C142 122 118 134 98 128 C78 122 70 104 74 90" stroke="#1C1B3A" stroke-width="4.5"/>
+<path d="M18 88 C58 44 156 42 200 88" stroke="#1C1B3A" stroke-width="1.6" opacity="0.55"/>
+<path d="M60 44 L52 26 M90 34 L88 14 M122 33 L126 13 M154 42 L164 24" stroke="#1C1B3A" stroke-width="3.5"/>
+<path d="M92 84 C102 82 116 86 128 83" stroke="#E8902A" stroke-width="6"/>
+<path d="M92 101 C104 99 116 103 128 100" stroke="#E8902A" stroke-width="6"/>
+
+</g></svg>

@@ -1,5 +1,5 @@
 # Python 3.10 - 3.13. Tested with Python 3.13 and the versions noted in the README.
-streamlit>=1.50,<2
+streamlit>=1.50,<2  # top navigation and page links
 pydantic>=2.6,<3
 pandas>=2.1,<3
 plotly>=5.20,<7
